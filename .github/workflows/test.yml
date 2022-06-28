@@ -1,0 +1,87 @@
+name: Test
+on:
+  pull_request:
+    branches: 
+    - main
+    
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    environment: baibay
+
+    strategy:
+      matrix:
+        node-version: ['17.x']
+
+    services:
+      mongodb:
+        image: mongo:latest
+        options: >-
+          --health-cmd mongo
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 27017:27017
+      kafka: 
+        image: wurstmeister/kafka
+        env:
+          KAFKA_BROKER_ID: 1
+          KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+          KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+          ALLOW_PLAINTEXT_LISTENER: yes
+          KAFKA_ADVERTISED_HOST_NAME: kafka
+          KAFKA_DELETE_TOPIC_ENABLE: false
+          KAFKA_AUTO_CREATE_TOPICS_ENABLE: false
+          KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+          KAFKA_ADVERTISED_PORT: 9092
+        ports:
+          - 9092:9092
+      zookeeper: 
+        image: wurstmeister/zookeeper
+        env:
+          ZOOKEEPER_CLIENT_PORT: 2181
+          ZOOKEEPER_TICK_TIME: 2000
+          ALLOW_ANONYMOUS_LOGIN: yes
+        ports:
+          - 2181:2181
+
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v3
+
+      - name: Setup node version ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
+
+      - name: Migration
+        run: yarn migrate
+
+      - name: Create env file
+        run: |
+          touch .env
+          echo AWS_CREDENTIAL_KEY="$AWS_CREDENTIAL_KEY" >> .env
+          echo AWS_CREDENTIAL_SECRET="$AWS_CREDENTIAL_SECRET" >> .env
+          echo AWS_S3_BUCKET="$AWS_S3_BUCKET" >> .env
+          echo AWS_S3_REGION="$AWS_S3_REGION" >> .env
+          echo KAFKA_BROKERS="$KAFKA_BROKERS" >> .env
+        env:
+          AWS_CREDENTIAL_KEY: ${{ secrets.AWS_CREDENTIAL_KEY }}
+          AWS_CREDENTIAL_SECRET: ${{ secrets.AWS_CREDENTIAL_SECRET }}
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          AWS_S3_REGION: ${{ secrets.AWS_S3_REGION }}
+          KAFKA_BROKERS: ${{ secrets.KAFKA_BROKERS }}
+          
+      - name: Unit Test
+        run: yarn test:unit
+
+      - name: Unit Integration
+        run: yarn test:integration
+
+      - name: E2E Test
+        run: yarn test:e2e
+
