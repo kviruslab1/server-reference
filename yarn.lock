@@ -2024,10 +2024,10 @@
     jsonc-parser "3.0.0"
     pluralize "8.0.0"
 
-"@nestjs/terminus@^8.0.8":
-  version "8.0.8"
-  resolved "https://registry.yarnpkg.com/@nestjs/terminus/-/terminus-8.0.8.tgz#d8303201e4cde8e1e48f500d8a4f3b7f4449788f"
-  integrity sha512-VQwIfnbnvqVN1K2o82mjbqnFJnwP/TT8qojSsIUIEqW29elz0TfvjquICrQdEfqxsqn6DcGjLYF4kjHBORsJZQ==
+"@nestjs/terminus@^8.1.1":
+  version "8.1.1"
+  resolved "https://registry.yarnpkg.com/@nestjs/terminus/-/terminus-8.1.1.tgz#21a7c1a543224ebfef00d161efdf22e390376301"
+  integrity sha512-C+Pm1LZse8ZSfXeZXMTmUIGAmDpov1WRury/cyWj50ceCCCWz7csACNouGBEvjDmBklzfbkxgDH9mOSbm1r54A==
   dependencies:
     check-disk-space "3.3.0"
 
