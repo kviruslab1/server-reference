@@ -3604,15 +3604,10 @@ cookie-signature@1.0.6:
   resolved "https://registry.yarnpkg.com/cookie-signature/-/cookie-signature-1.0.6.tgz#e303a882b342cc3ee8ca513a79999734dab3ae2c"
   integrity sha1-4wOogrNCzD7oylE6eZmXNNqzriw=
 
-cookie@0.5.0:
+cookie@0.5.0, cookie@^0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.5.0.tgz#d1f5d71adec6558c58f389987c366aa47e994f8b"
   integrity sha512-YZ3GUyn/o8gfKJlnlX7g7xq4gyO6OSuhGPKaaGssGB2qgDUS0gPgtTvoyZLTt9Ab6dC4hfc9dV5arkvc/OCmrw==
-
-cookie@^0.4.1:
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.4.2.tgz#0e41f24de5ecf317947c82fc789e06a884824432"
-  integrity sha512-aSWTXFzaKWkvHO1Ny/s+ePFpvKsPnjc551iI41v3ny/ow6tBG5Vd+FuqGNhh1LxOmVzOlGUriIlOaokOvhaStA==
 
 cookiejar@^2.1.3:
   version "2.1.3"
@@ -6355,14 +6350,14 @@ nestjs-command@^3.1.1:
     lodash.compact "^3.0.1"
     lodash.flattendeep "^4.4.0"
 
-nestjs-i18n@^9.1.2:
-  version "9.1.2"
-  resolved "https://registry.yarnpkg.com/nestjs-i18n/-/nestjs-i18n-9.1.2.tgz#f0e0c79c0400fb7fe84a1602d3f2c79e998c8546"
-  integrity sha512-5DDmhmjdslK1BBav7czfWVGV15WLDmyRBBMUCzvirGgWQAGVcoEm0LoV7iKIAOBzZAHHlRJVuxARvNXvZtXtBA==
+nestjs-i18n@^9.1.8:
+  version "9.1.8"
+  resolved "https://registry.yarnpkg.com/nestjs-i18n/-/nestjs-i18n-9.1.8.tgz#33e649038617f1a17bd56fc6466a0e58ad26cb94"
+  integrity sha512-6RI+Z5yYPxSH93I4bN8ryL82UvqOmHqb9wDOKKi37A9A7hOOf8k3yUj94sS1lUFaHMGtXuvHuUHzjuZ2zpYEKA==
   dependencies:
     accept-language-parser "^1.5.0"
     chokidar "^3.5.3"
-    cookie "^0.4.1"
+    cookie "^0.5.0"
     iterare "^1.2.1"
     js-yaml "^4.1.0"
     string-format "^2.0.0"
